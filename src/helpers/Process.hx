@@ -20,4 +20,9 @@ class Process {
 			} // ? this is the weirdest way to re-direct output I have ever seen.
 		}
 	}
+	public static function checkCommand(execName:String):Bool {
+        var proc = new sys.io.Process(execName);
+		var code = proc.exitCode(true);
+		return code == 0;
+    }
 }
