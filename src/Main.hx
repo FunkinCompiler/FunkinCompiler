@@ -1,3 +1,5 @@
+import commands.SetupTask;
+import commands.ProjectTasks;
 import commands.CompileTasks;
 import haxe.Exception;
 
@@ -16,6 +18,12 @@ class Main {
 	// location of v-slice engine's "mods" directory (beginning in "source/ttw" folder)
 	public static var baseGane_modDir:String = '../$baseGameDir/mods';
 	public static final commands:Map<String,() -> Void> = [
+		"setup" => () ->{
+			SetupTask.task_setupEnvironment();
+		},
+		"new" => () ->{
+			ProjectTasks.task_setupProject();
+		},
 		"just-run" => () ->{
 			CompileTasks.Task_RunGame('../$baseGameDir/');
 		},
@@ -40,7 +48,7 @@ class Main {
 		var args = Sys.args();
 		trace(args);
 		var compileMode:String = args.length == 1 ? args[0] : "";
-		if(args.length != 1){
+		if(compileMode == ""){
 			interactiveMenu();
 		}
 		else if (commands.exists(compileMode)){
@@ -62,7 +70,7 @@ class Main {
 			Sys.println('${programNames.length}. $str');
 		}
 		var user_input = Interaction.requestInput("Select program number:");
-		var user_index = Std.parseInt(user_input);
+		var user_index = Std.parseInt(user_input)-1;
 		if (user_index >0 && user_index <= programNames.length){
 			try {
 				commands[programNames[user_index]]();

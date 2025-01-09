@@ -23,6 +23,19 @@ class Process {
 	public static function checkCommand(execName:String):Bool {
         var proc = new sys.io.Process(execName);
 		var code = proc.exitCode(true);
+		if( code != 0){
+			Sys.println("ERROR");
+			Sys.println("-------");
+			Sys.println(proc.stdout.readAll());
+			Sys.println("-------");
+
+		}
 		return code == 0;
+    }
+	public static function isPureHaxelib():Bool {
+        var proc = new sys.io.Process("haxelib list");
+		var code = proc.exitCode(true);
+		var out = proc.stdout.readAll();
+		return code == 0 && out.length == 0;
     }
 }

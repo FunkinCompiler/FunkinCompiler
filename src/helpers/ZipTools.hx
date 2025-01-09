@@ -1,5 +1,11 @@
 package helpers;
 
+import haxe.zip.Tools;
+import haxe.io.Path;
+import haxe.io.Input;
+import sys.io.FileInput;
+import sys.io.File;
+import haxe.zip.Reader;
 import haxe.io.Output;
 import haxe.zip.Entry;
 import haxe.io.Bytes;
@@ -34,6 +40,19 @@ class ZipTools {
 			entries.push(entry);
 		}, s -> {});
 		return entries;
+	}
+	public static function extractZip(file:Input,target:String) {
+		var zip = Reader.readZip(file);
+		FileSystem.createDirectory(target);
+		for (node in zip){
+			if(node.crc32 == null || node.crc32 == 0){
+				FileSystem.createDirectory(Path.join([target,node.fileName]));
+			}
+			else {
+				Tools.uncompress(node);
+				File.saveBytes(Path.join([target,node.fileName]),node.data);
+			}
+		}
 	}
     public static function createIgnoreNode():haxe.zip.Entry
         {
