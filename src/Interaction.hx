@@ -18,6 +18,9 @@ class Interaction {
 	public static function showPressToContinue(prompt:String = "Press any key to continue") {
 		Sys.print(prompt);
 		Sys.getChar(false);
+		#if windows
+		Sys.print("\n");
+		#end
 	}
 
 }

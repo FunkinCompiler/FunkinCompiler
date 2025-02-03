@@ -9,8 +9,8 @@ class SetupTask {
     "You don't have haxe???\nGet it from here: https://haxe.org/download/";
     static final HAXELIB_ERROR:String = 
     "You seem to have non-empty, or absent dependencies folder.\n"+
-    "Try either running <haxelib setup>, or cleaning your dependencies folder.\n"+
-    "You may also continue this setup if it failed last time.";
+    "You can reinstall existing dependencies, or keep them as is.\n"+
+    "Do you want to reinstall? (yes/no): ";
     static final dependencies:Array<Array<String>> = [
         ["git","funkin",            "https://github.com/FunkinCompiler/Funkin-lib.git",     "da3c009e613c1661493750267a4c744ce0107e73"],
         ["git","discord_rpc",       "https://github.com/FunkinCrew/linc_discord-rpc",       "2d83fa863ef0c1eace5f1cf67c3ac315d1a3a8a5"],
@@ -45,6 +45,7 @@ class SetupTask {
         ["install","hxp",       "1.2.2"]
     ];
     public static function task_setupEnvironment() {
+        var postfix = " --never";
         Sys.println("[SETUP] Checking git..");
         if(!Process.checkCommand("git -v")){
             Interaction.displayError(GIT_ERROR);
@@ -55,13 +56,18 @@ class SetupTask {
             Interaction.displayError(HAXE_ERROR);
             return;
         }
+
         Sys.println("[SETUP] Checking haxelib..");
         if(!Process.isPureHaxelib()){
-            Interaction.displayError(HAXELIB_ERROR);
+            var choice = Interaction.requestInput(HAXELIB_ERROR);
+            if(choice.toLowerCase() == "yes" || choice.toLowerCase() == "y") {
+                postfix = " --always";
+                Sys.println("Overriding libraries!");
+            }
         }
         for (line in dependencies){
             Sys.println('[SETUP] Installing ${line[1]}..');
-            var success = Process.checkCommand('haxelib '+line.join(" "));
+            var success = Process.checkCommand('haxelib '+line.join(" ")+postfix);
         }
         Sys.println('[SETUP] Checking mod template..');
         if (!ProjectTasks.assertTemplateZip()){
