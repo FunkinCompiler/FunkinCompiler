@@ -65,7 +65,8 @@ class SetupTask {
         }
         Sys.println('[SETUP] Checking mod template..');
         if (!ProjectTasks.assertTemplateZip()){
-            Sys.println("Mod template is missing! It'll be downloaded when creating new project.");
+            Sys.println("Mod template is missing! Attempting to download..");
+            ProjectTasks.assertTemplateZip();
         }
         Sys.println("[SETUP] Setup done!");
     }

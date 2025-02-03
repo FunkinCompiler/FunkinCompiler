@@ -1,50 +1,48 @@
+import helpers.Config;
 import commands.SetupTask;
 import commands.ProjectTasks;
 import commands.CompileTasks;
 import haxe.Exception;
 
 class Main {
-	public static var Mod_Directory:String = "workbench";
+	// public static var Mod_Directory:String = "workbench";
 
-	// location of v-slice engine directory (beginning in root directory)
-	public static var baseGameDir:String = "funkinGame";
+	// // location of v-slice engine directory (beginning in root directory)
+	// public static var baseGameDir:String = "funkinGame";
 
-	public static var modAssetsDir:String = "mod_base";
+	// public static var modAssetsDir:String = "mod_base";
 
-	public static var fnfcFilesDir:String = "fnfc_files";
-	public static var hxcFilesDir:String = "source/mod/";
+	// public static var fnfcFilesDir:String = "fnfc_files";
+	// public static var hxcFilesDir:String = "source/mod/";
 
 	//* CONFIG END
 	// location of v-slice engine's "mods" directory (beginning in "source/ttw" folder)
-	public static var baseGane_modDir:String = '../$baseGameDir/mods';
-	public static final commands:Map<String,() -> Void> = [
-		"setup" => () ->{
+	//public static var baseGane_modDir:String = '../$baseGameDir/mods';
+	public static final commands:Map<String,(Config) -> Void> = [
+		"setup" => (cfg) ->{
 			SetupTask.task_setupEnvironment();
 		},
-		"new" => () ->{
+		"new" => (cfg) ->{
 			ProjectTasks.task_setupProject();
 		},
-		"just-run" => () ->{
-			CompileTasks.Task_RunGame('../$baseGameDir/');
+		"just-run" => (cfg) ->{
+			CompileTasks.Task_RunGame(cfg.GAME_PATH);
 		},
-		"just-compile" => () ->{
-			CompileTasks.Task_CompileGame(modAssetsDir, hxcFilesDir, fnfcFilesDir, baseGane_modDir + "/" + Mod_Directory);
+		"just-compile" => (cfg) ->{
+			CompileTasks.Task_CompileGame(cfg.MOD_CONTENT_FOLDER, cfg.MOD_HX_FOLDER, cfg.MOD_FNFC_FOLDER, cfg.GAME_PATH+"/mods/"+cfg.GAME_MOD_NAME);
 			trace("Done!");
 		},
-		"run" => () ->{
-			CompileTasks.Task_CompileGame(modAssetsDir, hxcFilesDir, fnfcFilesDir, baseGane_modDir + "/" + Mod_Directory);
-			CompileTasks.Task_RunGame('../$baseGameDir/');
+		"run" => (cfg) ->{
+			CompileTasks.Task_CompileGame(cfg.MOD_CONTENT_FOLDER, cfg.MOD_HX_FOLDER, cfg.MOD_FNFC_FOLDER, cfg.GAME_PATH+"/mods/"+cfg.GAME_MOD_NAME);
+			CompileTasks.Task_RunGame(cfg.GAME_PATH);
 		},
-		"export" => () ->{
-			CompileTasks.Task_ExportGame(modAssetsDir, hxcFilesDir, fnfcFilesDir, baseGane_modDir + "/" + Mod_Directory);
+		"export" => (cfg) ->{
+			CompileTasks.Task_ExportGame(cfg.MOD_CONTENT_FOLDER, cfg.MOD_HX_FOLDER, cfg.MOD_FNFC_FOLDER, cfg.GAME_PATH+"/mods/"+cfg.GAME_MOD_NAME);
 			trace("Done!");
 		}
 	];
 
 	public static function main() {
-		var x = () ->{
-
-		};
 		var args = Sys.args();
 		trace(args);
 		var compileMode:String = args.length == 1 ? args[0] : "";
@@ -53,7 +51,8 @@ class Main {
 		}
 		else if (commands.exists(compileMode)){
 			try {
-				commands[compileMode]();
+				var config = new Config();
+				commands[compileMode](config);
 			} catch (x:Exception) {
 				Interaction.displayError('Fatal error occurred while running in "$compileMode" :\n\n${x.details()}\n');
 			}
@@ -73,7 +72,8 @@ class Main {
 		var user_index = Std.parseInt(user_input)-1;
 		if (user_index >0 && user_index <= programNames.length){
 			try {
-				commands[programNames[user_index]]();
+				var config = new Config();
+				commands[programNames[user_index]](config);
 				Interaction.showPressToContinue("Press any key to end interactive mode...");
 			} catch (x:Exception) {
 				Interaction.displayError('Fatal error occurred while running in "${programNames[user_index]}" :\n\n${x.details()}\n');
