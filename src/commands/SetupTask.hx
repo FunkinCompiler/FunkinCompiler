@@ -21,7 +21,6 @@ class SetupTask {
         ["git","flixel",            "https://github.com/FunkinCrew/flixel",                 "f2b090d6c608471e730b051c8ee22b8b378964b1"],
         ["git","flixel-addons",     "https://github.com/FunkinCrew/flixel-addons",          "7424db4e9164ff46f224a7c47de1b732d2542dd7"],
         ["git","flixel-text-input", "https://github.com/FunkinCrew/flixel-text-input",      "951a0103a17bfa55eed86703ce50b4fb0d7590bc"],
-        ["git","flixel-ui",         "https://github.com/HaxeFlixel/flixel-ui",              "27f1ba626f80a6282fa8a187115e79a4a2133dc2"],
         ["git","flxanimate",        "https://github.com/Dot-Stuff/flxanimate",              "0654797e5eb7cd7de0c1b2dbaa1efe5a1e1d9412"],
         ["git","FlxPartialSound",   "https://github.com/FunkinCrew/FlxPartialSound.git",    "a1eab7b9bf507b87200a3341719054fe427f3b15"],
 

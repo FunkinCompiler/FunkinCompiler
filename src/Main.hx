@@ -24,7 +24,7 @@ class Main {
 			SetupTask.task_setupEnvironment();
 		},
 		"new" => (cfg) ->{
-			ProjectTasks.task_setupProject();
+			ProjectTasks.task_setupProject(cfg);
 		},
 		"just-run" => (cfg) ->{
 			CompileTasks.Task_RunGame(cfg.GAME_PATH);

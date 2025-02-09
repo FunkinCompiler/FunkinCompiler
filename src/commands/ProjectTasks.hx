@@ -1,5 +1,6 @@
 package commands;
 
+import helpers.Config;
 import haxe.io.Path;
 import helpers.ZipTools;
 import haxe.Http;
@@ -7,10 +8,9 @@ import sys.FileSystem;
 import sys.io.File;
 
 class ProjectTasks {
-    private static final TEMPLATE_COMMIT:String = "7f72b11590b8d90b4c5cb7320c913a6ce2f44f6d";
-    public static function assertTemplateZip():Bool {
+    public static function assertTemplateZip(cfg:Config):Bool {
         if(!FileSystem.exists("template.zip")){
-            var client = new Http('https://github.com/FunkinCompiler/mod-template/archive/$TEMPLATE_COMMIT.zip');
+            var client = new Http(cfg.TEMPLATE_REMOTE_SRC);
             client.request();
             if (client.responseBytes == null){
                 return false;
@@ -19,12 +19,13 @@ class ProjectTasks {
         }
         return true;
     }
-    public static function task_setupProject() {
+    public static function task_setupProject(cfg:Config) {
         var name = Interaction.requestInput("Type in the name of the project:");
         Sys.println("Making project...");
-        if (assertTemplateZip()){
+        if (assertTemplateZip(cfg)){
             ZipTools.extractZip(File.read("template.zip"),name);
             File.copy(Sys.programPath(),Path.join([name,"compiler.exe"]));
+            File.copy("funk.cfg",Path.join([name,"funk.cfg"]));
             if (Sys.systemName() == "Linux"){
                 Sys.command('chmod +x \'${Path.join([name,"compiler.exe"])}\'');
             }
