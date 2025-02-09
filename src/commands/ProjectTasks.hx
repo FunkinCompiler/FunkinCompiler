@@ -8,9 +8,9 @@ import sys.FileSystem;
 import sys.io.File;
 
 class ProjectTasks {
-    public static function assertTemplateZip(cfg:Config):Bool {
+    public static function assertTemplateZip(template_url:String):Bool {
         if(!FileSystem.exists("template.zip")){
-            var client = new Http(cfg.TEMPLATE_REMOTE_SRC);
+            var client = new Http(template_url);
             client.request();
             if (client.responseBytes == null){
                 return false;
@@ -19,10 +19,10 @@ class ProjectTasks {
         }
         return true;
     }
-    public static function task_setupProject(cfg:Config) {
+    public static function task_setupProject(template_url:String) {
         var name = Interaction.requestInput("Type in the name of the project:");
         Sys.println("Making project...");
-        if (assertTemplateZip(cfg)){
+        if (assertTemplateZip(template_url)){
             ZipTools.extractZip(File.read("template.zip"),name);
             File.copy(Sys.programPath(),Path.join([name,"compiler.exe"]));
             File.copy("funk.cfg",Path.join([name,"funk.cfg"]));

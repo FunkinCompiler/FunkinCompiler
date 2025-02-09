@@ -43,7 +43,7 @@ class SetupTask {
         ["install","hamcrest",  "3.0.0"],
         ["install","hxp",       "1.2.2"]
     ];
-    public static function task_setupEnvironment() {
+    public static function task_setupEnvironment(template_url:String) {
         var postfix = " --never";
         Sys.println("[SETUP] Checking git..");
         if(!Process.checkCommand("git -v")){
@@ -73,7 +73,7 @@ class SetupTask {
             else Sys.println("[ERROR "+code+"] Command failed! Ignoring..");
         }
         Sys.println('[SETUP] Checking mod template..');
-        if (!ProjectTasks.assertTemplateZip()){
+        if (!ProjectTasks.assertTemplateZip(template_url)){
             Sys.println("Mod template is missing!");
         }
         Sys.println("[SETUP] Setup done!");
