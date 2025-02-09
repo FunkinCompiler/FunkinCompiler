@@ -63,14 +63,14 @@ class CompileTasks {
 		var mac_bin = FileSystem.exists(Path.join([game_path, "Funkin.app"])); // not supported
 		if (windows_bin) {
 			if (Sys.systemName() == "Windows")
-				Process.spawnProcess(game_path, "Funkin.exe");
+				Process.spawnFunkinGame(game_path, "Funkin.exe");
 			else {
 				trace("[INFO] Windows build on non-windows machine. Attempting to run using wine...");
-				Process.spawnProcess(game_path, "Funkin.exe", "wine ");
+				Process.spawnFunkinGame(game_path, "Funkin.exe", "wine ");
 			}
 		} else if (linux_bin) {
 			if (Sys.systemName() == "Linux")
-				Process.spawnProcess(game_path, "Funkin");
+				Process.spawnFunkinGame(game_path, "Funkin");
 			else
 				Interaction.displayError('Incompatible FNF version. Replace it with the windows one.');
 		} else if (mac_bin && Sys.systemName() == "Mac")

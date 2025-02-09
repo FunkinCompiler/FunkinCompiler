@@ -18,6 +18,7 @@ class Main {
 	//* CONFIG END
 	// location of v-slice engine's "mods" directory (beginning in "source/ttw" folder)
 	//public static var baseGane_modDir:String = '../$baseGameDir/mods';
+	private static final watermark:String = "Funkin Compiler v0.1";
 	public static final commands:Map<String,(Config) -> Void> = [
 		"setup" => (cfg) ->{
 			SetupTask.task_setupEnvironment();
@@ -63,6 +64,7 @@ class Main {
 	}
 	static function interactiveMenu() {
 		Sys.println("No arguments! Running in interactive mode...");
+		Sys.println(watermark);
 		var programNames = new Array<String>();
 		for (str in commands.keys()){
 			programNames.push(str);

@@ -67,12 +67,15 @@ class SetupTask {
         }
         for (line in dependencies){
             Sys.println('[SETUP] Installing ${line[1]}..');
-            var success = Process.checkCommand('haxelib '+line.join(" ")+postfix);
+            var cmd = 'haxelib '+line.join(" ")+postfix;
+            Sys.println("> "+cmd);
+            var code = Process.spawnProcess(cmd);
+            if(code == 0) Sys.println("Done!");
+            else Sys.println("[ERROR "+code+"] Command failed! Ignoring..");
         }
         Sys.println('[SETUP] Checking mod template..');
         if (!ProjectTasks.assertTemplateZip()){
-            Sys.println("Mod template is missing! Attempting to download..");
-            ProjectTasks.assertTemplateZip();
+            Sys.println("Mod template is missing!");
         }
         Sys.println("[SETUP] Setup done!");
     }
