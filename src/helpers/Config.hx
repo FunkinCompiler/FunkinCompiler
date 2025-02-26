@@ -11,7 +11,7 @@ class Config {
         "mod_fnfc_folder" => "fnfc_files",
         "mod_hx_folder" => "source/mod/",
         "mod_content_folder" => "mod_base",
-        "template_remote_src" => "https://github.com/FunkinCompiler/mod-template/releases/download/lol/0.5.3.zip",
+        "template_remote_src" => "https://github.com/FunkinCompiler/template-binaries/raw/refs/heads/main/0.5.3.zip",
     ];
     
     private var map:Map<String,String>;
