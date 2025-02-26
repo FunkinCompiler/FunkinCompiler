@@ -12,7 +12,7 @@ class SetupTask {
     "You can reinstall existing dependencies, or keep them as is.\n"+
     "Do you want to reinstall? (yes/no): ";
     static final dependencies:Array<Array<String>> = [
-        ["git","funkin",            "https://github.com/FunkinCompiler/Funkin-lib.git",     "da3c009e613c1661493750267a4c744ce0107e73"],
+        ["git","funkin",            "https://github.com/FunkinCompiler/Funkin-lib.git",     "966732aecbd0be947c2a5aaed5aa7b2d928c0ad6"],
         ["git","discord_rpc",       "https://github.com/FunkinCrew/linc_discord-rpc",       "2d83fa863ef0c1eace5f1cf67c3ac315d1a3a8a5"],
         ["git","mconsole",          "https://github.com/massive-oss/mconsole",              "06c0499ed8f80628a0e6e55ffa32c3cbd688a838"],
         ["git","lime",              "https://github.com/FunkinCrew/lime",                   "872ff6db2f2d27c0243d4ff76802121ded550dd7"],
