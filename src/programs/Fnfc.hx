@@ -1,5 +1,6 @@
 package programs;
 
+import helpers.LangStrings;
 import helpers.FileManager;
 import sys.FileSystem;
 import haxe.io.Path;
@@ -20,7 +21,7 @@ class Fnfc {
     public function processFile(file_path:String) {
         if (!file_path.endsWith(".fnfc"))
             {
-              trace('[WARN] $file_path is not a valid chart file. Ignoring!');
+              trace(LangStrings.FNFC_INVALID_FILE(file_path));
               return;
             }
             var zip = Reader.readZip(File.read(Path.join([path, file_path])));
@@ -29,14 +30,14 @@ class Fnfc {
             var fnfc_manifestList = zip.filter(s -> s.fileName == "manifest.json");
             if (fnfc_manifestList.length != 1)
             {
-              Interaction.displayError('File $file_path doesn\'t contain a valid "manifest.json" file');
+              Interaction.displayError(LangStrings.FNFC_INVALID_MANIFEST(file_path));
               Sys.exit(0);
             }
             var fnfc_manifest = fnfc_manifestList.first().data.toString();
             var varGetter:EReg = ~/"songId": *"(.+)" */i;
             if (!varGetter.match(fnfc_manifest))
             {
-              Interaction.displayError('It seems like "manifest.json" in $file_path is missing a "songId" attribute...');
+              Interaction.displayError(LangStrings.FNFC_INVALID_MANIFEST_SONG_ID(file_path));
               Sys.exit(0);
             }
             var songId = varGetter.matched(1);

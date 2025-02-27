@@ -3,7 +3,6 @@ package helpers;
 class Process {
 	public static function spawnProcess(cmd:String):Int {	
 		var proc = new sys.io.Process(cmd);
-		
 		while (true) {
 			try {
 				var logline = proc.stdout.readLine();
@@ -43,5 +42,11 @@ class Process {
 		var code = proc.exitCode(true);
 		var out = proc.stdout.readAll();
 		return code == 0 && out.length == 0;
+    }
+	public static function resolveCommand(command:String):String {
+        var proc = new sys.io.Process(command);
+		var code = proc.exitCode(true);
+		var out = proc.stdout.readLine();
+		return out;
     }
 }

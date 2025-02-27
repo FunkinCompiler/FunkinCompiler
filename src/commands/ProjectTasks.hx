@@ -1,5 +1,6 @@
 package commands;
 
+import helpers.LangStrings;
 import helpers.Config;
 import haxe.io.Path;
 import helpers.ZipTools;
@@ -20,7 +21,7 @@ class ProjectTasks {
         return true;
     }
     public static function task_setupProject(template_url:String) {
-        var name = Interaction.requestInput("Type in the name of the project:");
+        var name = Interaction.requestInput(LangStrings.PROJECT_NAME_PROMPT);
         Sys.println("Making project...");
         if (assertTemplateZip(template_url)){
             ZipTools.extractZip(File.read("template.zip"),name);
