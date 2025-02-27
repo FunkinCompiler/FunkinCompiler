@@ -95,7 +95,7 @@ class SetupTask {
                 else continue;
             }
                 
-                if(!runSetupCommand('git init $repo${line.name}/git')) continue;
+                if(!runSetupCommand('git init "$repo${line.name}/git"')) continue;
                 Sys.setCwd('$repo${line.name}/git');
                 if(!runSetupCommand('git remote add origin ${line.clone_url}')) continue;
                 if(!runSetupCommand('git fetch --depth=1 origin ${line.commit}')) continue;
