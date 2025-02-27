@@ -44,7 +44,10 @@ class SetupTask {
 	static final dependencies:Array<Array<String>> = [
 		["install", "format", "3.5.0"],
 		["install", "hamcrest", "3.0.0"],
-		["install", "hxp", "1.2.2"]
+		["install", "hxp", "1.2.2"],
+
+		["install", "hxjsonast", "1.1.0"],
+		["install", "tink_core", "1.26.0"]
 	];
 
 	public static function task_setupEnvironment(template_url:String) {
