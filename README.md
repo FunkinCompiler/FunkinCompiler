@@ -52,7 +52,7 @@ You will be prompter for it's name and you can now start working on your mod.
 #### Working on the project
 
 - Open the newly created project in VSCode or a fork based on it. 
-- Head over to the extensions tab and istall all the recomended extensions.
+- Head over to the extensions tab and install all of the recomended extensions.
 
 - click the "HTML5" text on the bottom bar (if present) and change it to your sys platform (either linux or windows)
 
