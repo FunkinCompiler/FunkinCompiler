@@ -38,6 +38,7 @@ While doing so remember to:
 ## Getting your funkin mod to **funk**
 
 To see your mod in action head over to "Run and Debug" section of your IDE, which has all the necessary tasks to let you playtest your mod:
+> The output is in *Terminal* tab and **not in Debug Console** (which is opened by default for some reason)
 - `Download assets` *no need to use this at this point*
 - `Compile Mod` Exports your mod to a v-slice engine located in "funkinGame". It'll be put in "funkinGame/mods/workbench" unless otherwise defined in "Test.hx".
 - `Launch Mod` Starts up your engine (stopping this task will also stop the game. Useful in some cases)
