@@ -72,7 +72,7 @@ class Main {
 		}
 		var user_input = Interaction.requestInput("Select program number:");
 		var user_index = Std.parseInt(user_input)-1;
-		if (user_index >0 && user_index <= programNames.length){
+		if (user_index >= 0 && user_index <= programNames.length){
 			try {
 				var config = new Config();
 				commands[programNames[user_index]](config);
