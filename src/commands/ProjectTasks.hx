@@ -1,7 +1,7 @@
 package commands;
 
 import helpers.LangStrings;
-import helpers.Config;
+import config.FunkCfg;
 import haxe.io.Path;
 import helpers.ZipTools;
 import haxe.Http;

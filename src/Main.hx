@@ -1,4 +1,4 @@
-import helpers.Config;
+import config.FunkCfg;
 import commands.SetupTask;
 import commands.ProjectTasks;
 import commands.CompileTasks;
@@ -19,7 +19,7 @@ class Main {
 	// location of v-slice engine's "mods" directory (beginning in "source/ttw" folder)
 	//public static var baseGane_modDir:String = '../$baseGameDir/mods';
 	private static final watermark:String = "Funkin Compiler v0.1";
-	public static final commands:Map<String,(Config) -> Void> = [
+	public static final commands:Map<String,(FunkCfg) -> Void> = [
 		"setup" => (cfg) ->{
 			SetupTask.task_setupEnvironment(cfg.TEMPLATE_REMOTE_SRC);
 		},
@@ -52,7 +52,7 @@ class Main {
 		}
 		else if (commands.exists(compileMode)){
 			try {
-				var config = new Config();
+				var config = new FunkCfg();
 				commands[compileMode](config);
 			} catch (x:Exception) {
 				Interaction.displayError('Fatal error occurred while running in "$compileMode" :\n\n${x.details()}\n');
@@ -74,7 +74,7 @@ class Main {
 		var user_index = Std.parseInt(user_input)-1;
 		if (user_index >= 0 && user_index <= programNames.length){
 			try {
-				var config = new Config();
+				var config = new FunkCfg();
 				commands[programNames[user_index]](config);
 				Interaction.showPressToContinue("Press any key to end interactive mode...");
 			} catch (x:Exception) {

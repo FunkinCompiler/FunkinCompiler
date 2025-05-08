@@ -1,17 +1,17 @@
-package helpers;
+package config;
 
 import sys.FileSystem;
 import sys.io.File;
 using StringTools;
 
-class Config {
+class FunkCfg {
     private static var DEFAULT_MAP:Map<String,String> =[
         "game_path" => "../funkinGame",
         "game_mod_name" => "workbench",
         "mod_fnfc_folder" => "fnfc_files",
         "mod_hx_folder" => "source/mod/",
         "mod_content_folder" => "mod_base",
-        "template_remote_src" => "https://raw.githubusercontent.com/FunkinCompiler/template-binaries/refs/heads/main/0.5.3.zip",
+        "template_remote_src" => "https://raw.githubusercontent.com/FunkinCompiler/template-binaries/refs/heads/main/0.6.3.zip",
     ];
     
     private var map:Map<String,String>;
