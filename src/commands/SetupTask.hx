@@ -1,10 +1,8 @@
 package commands;
 
-import haxe.macro.Expr.Catch;
+import config.VSliceConfig;
 import haxe.Exception;
-import sys.io.File;
 import sys.FileSystem;
-import helpers.FileManager;
 import helpers.LangStrings;
 import helpers.Process;
 
@@ -18,7 +16,7 @@ typedef RepoLibrary = {
 
 class SetupTask {
 
-	public static function task_setupEnvironment(template_url:String) {
+	public static function task_setupEnvironment() {
         var force_lib_install:Bool = false;
 		var postfix = " --never";
 		Sys.println(LangStrings.MSG_SETUP_CHECKING_GIT);
@@ -49,7 +47,7 @@ class SetupTask {
 		runSetupCommand("haxelib git thx.core  https://github.com/fponticelli/thx.core.git 2bf2b992e06159510f595554e6b952e47922f128 --never --skip-dependencies");
 		runSetupCommand("haxelib git hmm  https://github.com/FunkinCrew/hmm.git --never --skip-dependencies");
 		runSetupCommand("haxelib git grig.audio  https://gitlab.com/haxe-grig/grig.audio.git 57f5d47f2533fd0c3dcd025a86cb86c0dfa0b6d2 --never --skip-dependencies");
-		runSetupCommand("haxelib git funkin https://github.com/FunkinCompiler/Funkin-lib.git 786e75e63a4529c99f5e0c4d943805610974c48d --always");
+		runSetupCommand('haxelib git funkin ${VSliceConfig.funkinLib_url} ${VSliceConfig.funkinLib_hash} --always');
 		var haxelib_repo = Process.resolveCommand("haxelib config").replace("\n","");
 		var programCwd = Sys.getCwd();
 
@@ -72,15 +70,10 @@ class SetupTask {
 					trace('Move failed: ${haxelib_repo}funkin/git/.haxelib/$dir -> ${haxelib_repo}$dir/');
 				}
 		}
-		var grig_dev_file = File.write('${haxelib_repo}.dev');
-		grig_dev_file.writeString('${haxelib_repo}grig,audio/git/src');
-		grig_dev_file.flush();
-		grig_dev_file.close();
-
 		Sys.setCwd(programCwd);
 
 		Sys.println('[SETUP] Checking mod template..');
-		if (!ProjectTasks.assertTemplateZip(template_url)) {
+		if (!ProjectTasks.assertTemplateZip()) {
 			Sys.println("Mod template is missing!");
 		}
 

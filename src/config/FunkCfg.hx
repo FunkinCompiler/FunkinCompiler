@@ -10,8 +10,7 @@ class FunkCfg {
         "game_mod_name" => "workbench",
         "mod_fnfc_folder" => "fnfc_files",
         "mod_hx_folder" => "source/mod/",
-        "mod_content_folder" => "mod_base",
-        "template_remote_src" => "https://raw.githubusercontent.com/FunkinCompiler/template-binaries/refs/heads/main/0.6.3.zip",
+        "mod_content_folder" => "mod_base"
     ];
     
     private var map:Map<String,String>;
@@ -42,10 +41,6 @@ class FunkCfg {
     public var MOD_CONTENT_FOLDER(get,null):String;
     function get_MOD_CONTENT_FOLDER():String {
         return getKey("mod_content_folder");
-    }
-    public var TEMPLATE_REMOTE_SRC(get,null):String;
-    function get_TEMPLATE_REMOTE_SRC():String {
-        return getKey("template_remote_src");
     }
 
 

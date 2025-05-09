@@ -1,5 +1,6 @@
 package commands;
 
+import helpers.LangStrings;
 import programs.Hxc;
 import programs.Fnfc;
 import helpers.Process;
@@ -12,7 +13,7 @@ import sys.io.File;
 class CompileTasks {
     public static function Task_ExportGame(mod_assets:String, hxc_source:String, fnfc_assets:String, export_mod_path:String) {
 		if (!FileManager.isManifestPresent(mod_assets)) {
-			Interaction.displayError(Interaction.MSG_EXPORT_META_MISSING);
+			Interaction.displayError(LangStrings.MSG_EXPORT_META_MISSING);
 			Sys.exit(0);
 		}
 		var manifestPath = '$mod_assets/_polymod_meta.json';
@@ -20,12 +21,12 @@ class CompileTasks {
 
 		var varGetter:EReg = ~/"mod_version": *"([0-9.]+)" */i;
 		if (!varGetter.match(poly_json)) {
-			Interaction.displayError(Interaction.MSG_EXPORT_META_NO_VERSION);
+			Interaction.displayError(LangStrings.MSG_EXPORT_META_NO_VERSION);
 			Sys.exit(0);
 		}
 
-		var userModName = Interaction.requestInput(Interaction.MSG_EXPORT_ZIP_NAME);
-		var userModVersion = Interaction.requestInput(Interaction.MSG_EXPORT_MOD_VERSION+' (${varGetter.matched(1)}): ');
+		var userModName = Interaction.requestInput(LangStrings.MSG_EXPORT_ZIP_NAME);
+		var userModVersion = Interaction.requestInput(LangStrings.MSG_EXPORT_MOD_VERSION+' (${varGetter.matched(1)}): ');
 
 		if (userModVersion != "") {
 			var validator:EReg = ~/[0-9.]+/i;

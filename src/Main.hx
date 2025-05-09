@@ -21,10 +21,10 @@ class Main {
 	private static final watermark:String = "Funkin Compiler v0.2";
 	public static final commands:Map<String,(FunkCfg) -> Void> = [
 		"setup" => (cfg) ->{
-			SetupTask.task_setupEnvironment(cfg.TEMPLATE_REMOTE_SRC);
+			SetupTask.task_setupEnvironment();
 		},
 		"new" => (cfg) ->{
-			ProjectTasks.task_setupProject(cfg.TEMPLATE_REMOTE_SRC);
+			ProjectTasks.task_setupProject();
 		},
 		"just-run" => (cfg) ->{
 			CompileTasks.Task_RunGame(cfg.GAME_PATH);

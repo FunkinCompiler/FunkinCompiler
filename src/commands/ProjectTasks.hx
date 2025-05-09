@@ -1,5 +1,6 @@
 package commands;
 
+import config.VSliceConfig;
 import helpers.LangStrings;
 import config.FunkCfg;
 import haxe.io.Path;
@@ -9,9 +10,12 @@ import sys.FileSystem;
 import sys.io.File;
 
 class ProjectTasks {
-    public static function assertTemplateZip(template_url:String):Bool {
+    public static function assertTemplateZip():Bool {
         if(!FileSystem.exists("template.zip")){
-            var client = new Http(template_url);
+            var input_url = Interaction.requestInput(LangStrings.SETUP_PROJECT_URL_PROMPT);
+            var url = VSliceConfig.getTemplateUrl(input_url);
+            Sys.println("Downloading from "+url);
+            var client = new Http(url);
             client.request();
             if (client.responseBytes == null){
                 return false;
@@ -20,10 +24,10 @@ class ProjectTasks {
         }
         return true;
     }
-    public static function task_setupProject(template_url:String) {
+    public static function task_setupProject() {
         var name = Interaction.requestInput(LangStrings.PROJECT_NAME_PROMPT);
         Sys.println("Making project...");
-        if (assertTemplateZip(template_url)){
+        if (assertTemplateZip()){
             ZipTools.extractZip(File.read("template.zip"),name);
             File.copy(Sys.programPath(),Path.join([name,"compiler.exe"]));
             File.copy("funk.cfg",Path.join([name,"funk.cfg"]));
