@@ -55,5 +55,7 @@ You will be prompter for it's name and you can now start working on your mod.
 - Head over to the extensions tab and install all of the recomended extensions.
 
 - click the "HTML5" text on the bottom bar (if present) and change it to your sys platform (either linux or windows)
+- Initialise a new git repo and add at least one commit and add all files to it (I recommend to use VSCode for that)
 
+Be sure to either restart VSCode or reload the window for the changes to take effect. After that you should be ready to go!
 [Here is a TTW file documenting the project's structure](./GETTING_STARED.md)
