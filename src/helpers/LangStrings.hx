@@ -1,6 +1,8 @@
 package helpers;
 
 class LangStrings {
+    public static inline final MSG_SETUP_CHECKING_GIT:String = "[SETUP] Checking git..";
+    public static inline final MSG_SETUP_CHECKING_HAXE:String = "[SETUP] Checking haxe..";
     public static inline final SETUP_GIT_ERROR:String = 
     "Git is absent on this system. You can install it from here: https://git-scm.com/";
     public static inline final SETUP_HAXE_ERROR:String = 

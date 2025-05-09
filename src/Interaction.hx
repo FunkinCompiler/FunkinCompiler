@@ -1,4 +1,5 @@
 class Interaction {
+
 	public static final MSG_EXPORT_ZIP_NAME:String = 
 		"Type in a name for your exported file (without .zip):";
 	public static final MSG_EXPORT_META_MISSING:String = 

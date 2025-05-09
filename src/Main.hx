@@ -18,7 +18,7 @@ class Main {
 	//* CONFIG END
 	// location of v-slice engine's "mods" directory (beginning in "source/ttw" folder)
 	//public static var baseGane_modDir:String = '../$baseGameDir/mods';
-	private static final watermark:String = "Funkin Compiler v0.1";
+	private static final watermark:String = "Funkin Compiler v0.2";
 	public static final commands:Map<String,(FunkCfg) -> Void> = [
 		"setup" => (cfg) ->{
 			SetupTask.task_setupEnvironment(cfg.TEMPLATE_REMOTE_SRC);
