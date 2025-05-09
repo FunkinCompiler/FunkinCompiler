@@ -29,8 +29,6 @@
 5. select  `setup` from the menu
 6. Once done, you can customise some settings from ``funk.cfg`` file.
 > Note: filepaths are based on your project's root dorectory
- - ``template_remote_src`` Holds a url to the mod template. 
- It'll be downloaded in case you don't have "template.zip" file yet
  - ``mod_content_folder`` Points to your mod's base folder. 
  All the files here will copied first when compiling your mod.
  - ``mod_hx_folder`` Point to your code managed, and then compiled by the program.
