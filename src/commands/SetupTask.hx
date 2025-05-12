@@ -51,6 +51,7 @@ class SetupTask {
 		var haxelib_repo = Process.resolveCommand("haxelib config").replace("\n","");
 		var programCwd = Sys.getCwd();
 
+
 		// This installs into a local repo. We need to move them
 		Sys.println("CWD: "+'${haxelib_repo}funkin/git/');
 		Sys.setCwd('${haxelib_repo}funkin/git/');
@@ -72,6 +73,9 @@ class SetupTask {
 		}
 		Sys.setCwd(programCwd);
 
+		Sys.println('[SETUP] Setup grig.audio..');
+		runSetupCommand('haxelib dev grig.audio "${haxelib_repo}grig,audio/git/src"');
+		
 		Sys.println('[SETUP] Checking mod template..');
 		if (!ProjectTasks.assertTemplateZip()) {
 			Sys.println("Mod template is missing!");
